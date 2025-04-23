@@ -101,14 +101,25 @@ public class Sc_ranking extends JavaPlugin {
             return;
         }
 
-        // スコア情報を収集
+        // baseスコアボードのエントリーを収集
+        Set<String> baseEntries = new HashSet<>();
         Map<String, Integer> scores = new HashMap<>();
-        Set<String> entries = baseObjective.getScoreboard().getEntries();
 
-        for (String entry : entries) {
+        for (String entry : scoreboard.getEntries()) {
             Score score = baseObjective.getScore(entry);
             if (score.isScoreSet()) {
+                baseEntries.add(entry);
                 scores.put(entry, score.getScore());
+            }
+        }
+
+        // pasteスコアボードのエントリーを収集し、baseにないエントリーをクリーンアップ
+        for (String entry : scoreboard.getEntries()) {
+            Score pasteScore = pasteObjective.getScore(entry);
+            if (pasteScore.isScoreSet() && !baseEntries.contains(entry)) {
+                // baseにないがpasteに残っているエントリーをリセット
+                scoreboard.resetScores(entry);
+                getLogger().info("Cleaned up player " + entry + " from ranking as they no longer exist in base scoreboard.");
             }
         }
 
@@ -116,21 +127,7 @@ public class Sc_ranking extends JavaPlugin {
         List<Map.Entry<String, Integer>> sortedScores = new ArrayList<>(scores.entrySet());
         sortedScores.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
 
-        // 現在のランキングスコアボードのエントリを取得して、それだけをリセット
-        Set<String> currentRankingEntries = new HashSet<>();
-        for (String entry : entries) {
-            Score score = pasteObjective.getScore(entry);
-            if (score.isScoreSet()) {
-                currentRankingEntries.add(entry);
-            }
-        }
-
-        // ランキングスコアボードの内容だけをリセット
-        for (String entry : currentRankingEntries) {
-            scoreboard.resetScores(entry);
-        }
-
-        // ランキングを更新
+        // ランキングを直接更新
         int rank = 1;
         for (Map.Entry<String, Integer> entry : sortedScores) {
             pasteObjective.getScore(entry.getKey()).setScore(rank);
