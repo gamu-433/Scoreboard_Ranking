@@ -1,6 +1,23 @@
 # sc_rankingの設定ファイル
-# baseにはランキング計算元のスコアボード名を設定します
-# pasteにはランキング表示先のスコアボード名を設定します
+# 複数のスコアボードペアを設定できます
 
+# 旧形式の設定（シングルペア用・後方互換性のため）
 base: points
 paste: ranking
+
+# 新形式の設定（複数ペア用）
+pairs:
+  # ポイントランキング
+  points:
+    base: points
+    paste: ranking
+
+  # キル数ランキング例
+  kills:
+    base: killCount
+    paste: killRanking
+
+  # 死亡回数ランキング例
+  deaths:
+    base: deathCount
+    paste: deathRanking
