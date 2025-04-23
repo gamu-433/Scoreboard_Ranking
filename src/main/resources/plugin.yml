@@ -1,0 +1,18 @@
+name: sc_ranking
+version: '${project.version}'
+main: petoma.me.sc_ranking.Sc_ranking
+api-version: 1.21
+description: Convert the contents of the scoreboard into rankings.
+author: petoma
+commands:
+  psc:
+    description: Main command for sc_ranking plugin
+    usage: /psc reload
+    permission: sc_ranking.use
+permissions:
+  sc_ranking.use:
+    description: Allows use of the basic psc command
+    default: true
+  sc_ranking.reload:
+    description: Allows reloading of the plugin configuration
+    default: op

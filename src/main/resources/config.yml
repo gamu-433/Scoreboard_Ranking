@@ -1,0 +1,6 @@
+# sc_rankingの設定ファイル
+# baseにはランキング計算元のスコアボード名を設定します
+# pasteにはランキング表示先のスコアボード名を設定します
+
+base: points
+paste: ranking
