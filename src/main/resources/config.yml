@@ -5,19 +5,11 @@
 base: points
 paste: ranking
 
-# 新形式の設定（複数ペア用）
 pairs:
-  # ポイントランキング
-  points:
+  example1:
     base: points
     paste: ranking
 
-  # キル数ランキング例
-  kills:
+  example2:
     base: killCount
     paste: killRanking
-
-  # 死亡回数ランキング例
-  deaths:
-    base: deathCount
-    paste: deathRanking
