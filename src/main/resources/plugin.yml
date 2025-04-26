@@ -7,7 +7,7 @@ author: petoma
 commands:
   psc:
     description: Main command for sc_ranking plugin
-    usage: /psc reload
+    usage: /<command> [reload]
     permission: sc_ranking.use
 permissions:
   sc_ranking.use:

@@ -39,7 +39,7 @@ public class Sc_ranking extends JavaPlugin {
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, this::updateAllRankings, 0L, 200L);
 
         getCommand("psc").setExecutor(this);
-
+        getCommand("psc").setTabCompleter(new PscTabCompleter());
         getLogger().info("sc_ranking has been enabled!");
     }
 
@@ -201,4 +201,5 @@ public class Sc_ranking extends JavaPlugin {
         }
         return false;
     }
+
 }
